@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paisesgui/ui/screens/launcher_screen.dart';
 import 'package:paisesgui/themes/tema_paises.dart';
+import 'package:paisesgui/ui/screens/login_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       theme: temaPaises,
-      home: const Scaffold(
-        body: LauncherScreen(),
-        
-      ),
+      home: const LoginScreen(),
     );
   }
 }
