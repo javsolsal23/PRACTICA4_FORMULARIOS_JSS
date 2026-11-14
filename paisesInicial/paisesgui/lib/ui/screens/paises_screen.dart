@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:paisesgui/data/repositories/paises_repository.dart';
 import 'package:paisesgui/domain/entities/pais.dart';
+import 'package:paisesgui/ui/screens/infopais_screen.dart';
 
 class PaisesScreen extends StatelessWidget {
-  PaisesScreen({super.key});
+  PaisesScreen({super.key, required this.continente});
 
   // Referencia al repositorio, de donde obtendremos la lista de continentes
+  final String continente;
   final PaisesRepository _repository = PaisesRepository();
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+      title: Text("Países de $continente"),
+          ),
+          body: Center(
           // Proporciona a _creaLlistaPaises la lista de paises de Europa
           child:
-              _creaListaPaises(_repository.getPaises('Europa'))), 
+              _creaListaPaises(_repository.getPaises(continente))) 
     );
   }
 
@@ -59,7 +64,16 @@ class PaisCard extends StatelessWidget {
     // que muestre la imagen  (obtenida de Internet a partir de la url)
     // y el nombre del país.
     
-    return Card(
+    return InkWell(
+    onTap: () {
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => InfoPaisScreen(nombrePais: nombre),
+        ),
+      );
+    },
+    child: Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -82,6 +96,7 @@ class PaisCard extends StatelessWidget {
           ),
         ],
       ),
+    )
     ); 
   }
 }

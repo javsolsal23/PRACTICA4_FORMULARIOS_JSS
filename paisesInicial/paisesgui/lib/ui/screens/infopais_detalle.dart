@@ -6,17 +6,15 @@ import 'package:paisesgui/domain/entities/pais.dart';
 import 'package:paisesgui/ui/widgets/my_weather_info.dart';
 
 class InfoPaisDetalle extends StatelessWidget {
-  InfoPaisDetalle({
-    super.key,
-  });
+  InfoPaisDetalle({super.key, required this.nombrePais});
 
-      // Referencia al repositorio, de donde obtendremos la lista de continentes
+  final String nombrePais;
   final PaisesRepository _repository = PaisesRepository();
 
 
   @override
   Widget build(BuildContext context) {
-    Pais pais = _repository.infoPais('Francia');
+    Pais pais = _repository.infoPais(nombrePais);
 
     // TO-DO
     // Añadir la información siguiente sobre el país:
@@ -26,8 +24,7 @@ class InfoPaisDetalle extends StatelessWidget {
 
     // Antes de la información, deberemos mostrar la información sobre el tiempo en el país,
     // mediante el widtget personalizado MyWeatherInfo(), que se os proporciona ya implementado
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           children: [
             MyWeatherInfo(),
@@ -74,7 +71,6 @@ class InfoPaisDetalle extends StatelessWidget {
             )
         ],
       ),
-    )
     );
   }
 }
